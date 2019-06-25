@@ -21,6 +21,10 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) {
+        if (ticket == null) {
+            this.lastErrorMessage = "Please provide your parking ticket.";
+            return null;
+        }
         return this.parkingLot.fetchCar(ticket);
     }
 
