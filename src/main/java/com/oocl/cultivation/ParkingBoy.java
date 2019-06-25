@@ -18,7 +18,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        this.parkingLot.sort((o1, o2) -> -Integer.compare(o1.getAvailableParkingPosition(), o2.getAvailableParkingPosition()));
+        this.parkingLot.sort((o1, o2) -> -Double.compare(o1.getAvailableRate(), o2.getAvailableRate()));
         for (ParkingLot parkingLot : this.parkingLot) {
             if (parkingLot.getAvailableParkingPosition() <= 0) continue;
             ParkingTicket parkingTicket = new ParkingTicket();

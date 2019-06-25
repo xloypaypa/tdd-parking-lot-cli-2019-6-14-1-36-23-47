@@ -189,4 +189,19 @@ class ParkingBoyFacts {
         assertEquals(1, parkingLot1.getAvailableParkingPosition());
         assertEquals(1, parkingLot2.getAvailableParkingPosition());
     }
+
+    @Test
+    void should_parking_to_only_one_of_parking_lot_if_the_one_have_higher_available_rate() {
+        ParkingLot parkingLotWithHigherAvailableRate = new ParkingLot(2);
+        ParkingLot parkingLotWithLowerAvailableRate = new ParkingLot(3);
+        parkingLotWithHigherAvailableRate.parkCar(new ParkingTicket(), new Car());
+        parkingLotWithLowerAvailableRate.parkCar(new ParkingTicket(), new Car());
+        parkingLotWithLowerAvailableRate.parkCar(new ParkingTicket(), new Car());
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLotWithLowerAvailableRate, parkingLotWithHigherAvailableRate));
+
+        parkingBoy.park(new Car());
+
+        assertEquals(0, parkingLotWithHigherAvailableRate.getAvailableParkingPosition());
+        assertEquals(1, parkingLotWithLowerAvailableRate.getAvailableParkingPosition());
+    }
 }
