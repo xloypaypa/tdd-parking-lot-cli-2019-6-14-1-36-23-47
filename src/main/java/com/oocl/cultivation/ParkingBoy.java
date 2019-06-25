@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ParkingBoy {
@@ -17,6 +18,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
+        this.parkingLot.sort((o1, o2) -> -Integer.compare(o1.getAvailableParkingPosition(), o2.getAvailableParkingPosition()));
         for (ParkingLot parkingLot : this.parkingLot) {
             if (parkingLot.getAvailableParkingPosition() <= 0) continue;
             ParkingTicket parkingTicket = new ParkingTicket();

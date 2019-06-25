@@ -175,4 +175,18 @@ class ParkingBoyFacts {
 
         assertEquals(carOnSecondParkingLot, parkingBoy.fetch(parkingTicketInSecondParkingLog));
     }
+
+    @Test
+    void should_have_one_car_in_each_parking_lot_if_both_two_parking_lot_can_park_2_cars() {
+        final int capacity = 2;
+        ParkingLot parkingLot1 = new ParkingLot(capacity);
+        ParkingLot parkingLot2 = new ParkingLot(capacity);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot1, parkingLot2));
+
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+
+        assertEquals(1, parkingLot1.getAvailableParkingPosition());
+        assertEquals(1, parkingLot2.getAvailableParkingPosition());
+    }
 }
