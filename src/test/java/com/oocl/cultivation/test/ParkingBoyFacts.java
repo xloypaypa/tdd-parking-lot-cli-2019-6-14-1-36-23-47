@@ -163,4 +163,16 @@ class ParkingBoyFacts {
 
         assertNotNull(parkingBoy.park(new Car()));
     }
+
+    @Test
+    void should_can_get_car_if_car_is_parked_on_second_parking_lot() {
+        final int capacity = 1;
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(new ParkingLot(capacity), new ParkingLot(capacity)));
+
+        parkingBoy.park(new Car());
+        Car carOnSecondParkingLot = new Car();
+        ParkingTicket parkingTicketInSecondParkingLog = parkingBoy.park(carOnSecondParkingLot);
+
+        assertEquals(carOnSecondParkingLot, parkingBoy.fetch(parkingTicketInSecondParkingLog));
+    }
 }
