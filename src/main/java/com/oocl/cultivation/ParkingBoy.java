@@ -15,6 +15,7 @@ public class ParkingBoy {
             this.parkingLot.parkCar(parkingTicket, car);
             return parkingTicket;
         } else {
+            this.lastErrorMessage = "Not enough position.";
             return null;
         }
     }
