@@ -46,6 +46,10 @@ public class ParkingBoy {
         return null;
     }
 
+    public void setLastErrorMessage(String lastErrorMessage) {
+        this.lastErrorMessage = lastErrorMessage;
+    }
+
     public String getLastErrorMessage() {
         return lastErrorMessage;
     }

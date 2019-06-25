@@ -46,11 +46,28 @@ class ParkingServiceManagerFacts {
 
     @Test
     void should_set_error_message_same_as_other_parking_boy_when_get_error_for_fetching() {
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
+        Car car = new Car();
+        parkingBoy.park(car);
+        ParkingServiceManager parkingServiceManager = new ParkingServiceManager(new ArrayList<>(), Collections.singletonList(parkingBoy));
 
+        parkingServiceManager.fetchBy(parkingBoy, null);
+
+        assertEquals(
+                "Please provide your parking ticket.",
+                parkingServiceManager.getLastErrorMessage()
+        );
     }
 
     @Test
     void should_set_error_message_same_as_other_parking_boy_when_get_error_for_parking() {
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
+        Car car = new Car();
+        parkingBoy.park(car);
+        ParkingServiceManager parkingServiceManager = new ParkingServiceManager(new ArrayList<>(), Collections.singletonList(parkingBoy));
 
+        parkingServiceManager.parkBy(parkingBoy, new Car());
+
+        assertEquals("Not enough position.", parkingServiceManager.getLastErrorMessage());
     }
 }

@@ -21,10 +21,22 @@ public class ParkingServiceManager extends ParkingBoy {
     }
 
     public ParkingTicket parkBy(ParkingBoy parkingBoy, Car car) {
-        return parkingBoy.park(car);
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+        if (parkingTicket != null) {
+            return parkingTicket;
+        } else {
+            this.setLastErrorMessage(parkingBoy.getLastErrorMessage());
+            return null;
+        }
     }
 
     public Car fetchBy(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
-        return parkingBoy.fetch(parkingTicket);
+        Car car = parkingBoy.fetch(parkingTicket);
+        if (car != null) {
+            return car;
+        } else {
+            this.setLastErrorMessage(parkingBoy.getLastErrorMessage());
+            return null;
+        }
     }
 }
