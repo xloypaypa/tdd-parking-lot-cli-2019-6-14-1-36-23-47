@@ -17,15 +17,15 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        if (this.parkingLot.get(0).getAvailableParkingPosition() > 0) {
+        for (ParkingLot parkingLot : this.parkingLot) {
+            if (parkingLot.getAvailableParkingPosition() <= 0) continue;
             ParkingTicket parkingTicket = new ParkingTicket();
-            this.parkingLot.get(0).parkCar(parkingTicket, car);
+            parkingLot.parkCar(parkingTicket, car);
             this.lastErrorMessage = null;
             return parkingTicket;
-        } else {
-            this.lastErrorMessage = "Not enough position.";
-            return null;
         }
+        this.lastErrorMessage = "Not enough position.";
+        return null;
     }
 
     public Car fetch(ParkingTicket ticket) {
