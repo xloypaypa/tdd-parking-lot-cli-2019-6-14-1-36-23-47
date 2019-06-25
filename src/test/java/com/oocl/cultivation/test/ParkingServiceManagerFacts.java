@@ -25,10 +25,23 @@ class ParkingServiceManagerFacts {
 
     @Test
     void should_can_drive_other_parking_boy_to_park_car() {
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
+        ParkingServiceManager parkingServiceManager = new ParkingServiceManager(new ArrayList<>(), Collections.singletonList(parkingBoy));
+        Car car = new Car();
+
+        ParkingTicket parkingTicket = parkingServiceManager.parkBy(parkingBoy, car);
+
+        assertEquals(car, parkingBoy.fetch(parkingTicket));
     }
 
     @Test
     void should_can_drive_other_parking_boy_to_fetch_car() {
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+        ParkingServiceManager parkingServiceManager = new ParkingServiceManager(new ArrayList<>(), Collections.singletonList(parkingBoy));
+
+        assertEquals(car, parkingServiceManager.fetchBy(parkingBoy, parkingTicket));
     }
 
     @Test

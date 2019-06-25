@@ -19,4 +19,12 @@ public class ParkingServiceManager extends ParkingBoy {
     public void addParkingBoy(ParkingBoy parkingBoy) {
         this.parkingBoys.add(parkingBoy);
     }
+
+    public ParkingTicket parkBy(ParkingBoy parkingBoy, Car car) {
+        return parkingBoy.park(car);
+    }
+
+    public Car fetchBy(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
+        return parkingBoy.fetch(parkingTicket);
+    }
 }
