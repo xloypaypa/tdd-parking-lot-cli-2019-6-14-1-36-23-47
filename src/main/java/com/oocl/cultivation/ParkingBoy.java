@@ -25,7 +25,11 @@ public class ParkingBoy {
             this.lastErrorMessage = "Please provide your parking ticket.";
             return null;
         }
-        return this.parkingLot.fetchCar(ticket);
+        Car car = this.parkingLot.fetchCar(ticket);
+        if (car == null) {
+            this.lastErrorMessage = "Unrecognized parking ticket.";
+        }
+        return car;
     }
 
     public String getLastErrorMessage() {
