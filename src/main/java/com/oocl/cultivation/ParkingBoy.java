@@ -13,6 +13,7 @@ public class ParkingBoy {
         if (this.parkingLot.getAvailableParkingPosition() > 0) {
             ParkingTicket parkingTicket = new ParkingTicket();
             this.parkingLot.parkCar(parkingTicket, car);
+            this.lastErrorMessage = null;
             return parkingTicket;
         } else {
             this.lastErrorMessage = "Not enough position.";
@@ -28,8 +29,11 @@ public class ParkingBoy {
         Car car = this.parkingLot.fetchCar(ticket);
         if (car == null) {
             this.lastErrorMessage = "Unrecognized parking ticket.";
+            return null;
+        } else {
+            this.lastErrorMessage = null;
+            return car;
         }
-        return car;
     }
 
     public String getLastErrorMessage() {
