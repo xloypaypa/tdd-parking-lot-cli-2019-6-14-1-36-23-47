@@ -6,6 +6,8 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyFacts {
@@ -150,5 +152,15 @@ class ParkingBoyFacts {
         parkingBoy.park(new Car());
 
         assertEquals("Not enough position.", parkingBoy.getLastErrorMessage());
+    }
+
+    @Test
+    void should_can_park_car_successfully_if_there_are_two_lot_with_1_capacity() {
+        final int capacity = 1;
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(new ParkingLot(capacity), new ParkingLot(capacity)));
+
+        parkingBoy.park(new Car());
+
+        assertNotNull(parkingBoy.park(new Car()));
     }
 }
