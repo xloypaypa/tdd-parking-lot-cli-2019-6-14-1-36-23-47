@@ -1,18 +1,25 @@
 package com.oocl.cultivation;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ParkingBoy {
 
-    private final ParkingLot parkingLot;
+    private final List<ParkingLot> parkingLot;
     private String lastErrorMessage;
 
     public ParkingBoy(ParkingLot parkingLot) {
+        this.parkingLot = Collections.singletonList(parkingLot);
+    }
+
+    public ParkingBoy(List<ParkingLot> parkingLot) {
         this.parkingLot = parkingLot;
     }
 
     public ParkingTicket park(Car car) {
-        if (this.parkingLot.getAvailableParkingPosition() > 0) {
+        if (this.parkingLot.get(0).getAvailableParkingPosition() > 0) {
             ParkingTicket parkingTicket = new ParkingTicket();
-            this.parkingLot.parkCar(parkingTicket, car);
+            this.parkingLot.get(0).parkCar(parkingTicket, car);
             this.lastErrorMessage = null;
             return parkingTicket;
         } else {
@@ -26,7 +33,7 @@ public class ParkingBoy {
             this.lastErrorMessage = "Please provide your parking ticket.";
             return null;
         }
-        Car car = this.parkingLot.fetchCar(ticket);
+        Car car = this.parkingLot.get(0).fetchCar(ticket);
         if (car == null) {
             this.lastErrorMessage = "Unrecognized parking ticket.";
             return null;
